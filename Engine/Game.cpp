@@ -97,13 +97,4 @@ void Game::ComposeFrame()
 		SpriteCodex::DrawTitle(300, 200, gfx);
 		gameStart = wnd.kbd.KeyIsPressed(VK_RETURN);
 	}
-
-	/*std::uniform_int_distribution<int> colorDistribution(0, 255);
-	for (int x = 0; x < grid.getWidth(); x++)
-		for (int y = 0; y < grid.getHeight(); y++)
-		{
-			Position pos = { x, y };
-			Color c(colorDistribution(rng), colorDistribution(rng), colorDistribution(rng));
-			grid.DrawCell(pos, c);
-		}*/
 }
