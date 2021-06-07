@@ -26,6 +26,7 @@
 #include "Grid.h"
 #include <random>
 #include "Snake.h"
+#include "FrameTimer.h"
 
 class Game
 {
@@ -52,8 +53,8 @@ private:
 	Snake snake;
 	Position reward;
 	Position deltaPos;
-	int movementTimer;
-	static constexpr int timeStep = 4;
+	FrameTimer timeStep;
+	float movementTimer;
 	bool gameEnd;
 	bool gameStart;
 	/********************************/

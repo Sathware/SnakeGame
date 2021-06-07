@@ -31,7 +31,7 @@ Game::Game( MainWindow& wnd )
 	yDist(0, Grid::getHeight() - 1),
 	snake(Position{ (Grid::getWidth() - 1) / 2, (Grid::getHeight() - 1) / 2 }), 
 	reward{ xDist(rng), yDist(rng) }, 
-	deltaPos{ 0, 0 }, movementTimer(0), gameEnd(false)
+	deltaPos{ 0, 0 }, movementTimer(0.0f), gameEnd(false), timeStep()
 {}
 
 void Game::Go()
@@ -46,6 +46,8 @@ void Game::UpdateModel()
 {
 	if (!gameEnd && gameStart)
 	{
+		movementTimer += timeStep.resetFrameTime();
+
 		if (snake.IsColliding(reward))
 		{
 			Position newRewardPos = { xDist(rng), yDist(rng) };
@@ -68,12 +70,11 @@ void Game::UpdateModel()
 		if (wnd.kbd.KeyIsPressed('D') && deltaPos.x != -1)
 			deltaPos = { 1, 0 };
 
-		if (movementTimer == timeStep)
+		if (movementTimer > 1.0f/30.0f)
 		{
 			snake.MoveBy(deltaPos);
-			movementTimer = 0;
+			movementTimer = 0.0f;
 		}
-		movementTimer++;
 	}
 }
 
